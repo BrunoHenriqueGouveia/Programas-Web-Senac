@@ -1,0 +1,47 @@
+
+body{
+  height: 100%;
+  width: 100%;
+  background: #e4ef65;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  gap:30px;
+  }
+header{
+  width:100%;
+  border-bottom: 1px solid #b1dd8b;
+  padding: 10px;
+  text-align: center;
+  }
+#sub-titulo{
+  background: #b1dd8b;
+  width:100%;
+  text-align: center;
+  display: none;
+  }
+footer{
+  margin-top: 150px;
+  width:100%;
+  border-top: 1px solid #b1dd8b;
+  padding: 10px;
+  text-align: center;
+  }
+main {
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  }
+#listaFilmes{
+  border: 1px solid #b1dd8b;
+  padding:30px;
+  display: none;
+  
+ }
+  button{
+    background-color: #e4ef65;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+  }
