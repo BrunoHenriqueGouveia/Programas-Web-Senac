@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(50deg, #00dbde 0%, #fc00ff 100%);
+}
+
+h1 {
+    text-align: center;
+}
+
+#form-tarefa {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#nome-tarefa {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#tarefas-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+td {
+    text-align: center;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #6adc35;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.buttonExcluir {
+    background-color: #f44336;
+}
+
+.buttonAlterar {
+    background-color: #e7e7e7;
+    color: black;
+}

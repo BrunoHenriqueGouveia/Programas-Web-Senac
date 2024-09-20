@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Getrenciar Tarefas</title>
+</head>
+
+<body>
+    <h1>Gerenciador de Tarefas</h1>
+    <form id="form-tarefa">
+        <input type="text" id="nome-tarefa" placeholder="Nome da Tarefa" required>
+        <button type="submit">Adicionar Tarefa</button>
+    </form>
+
+    <div id="tarefas-container">
+        <!-- Tarefas serão adicionadas aqui dinamicamente -->
+    </div>
+
+    <script>
+        // Verifica se existem tarefas no localStorage ao carregar a página
+        document.addEventListener("DOMContentLoaded", function () {
+            carregarTarefas();
+        });
+
+        // Adiciona evento de submit no formulário para adicionar tarefas
+        document.getElementById("form-tarefa").addEventListener("submit", function (event) {
+            event.preventDefault();
+            adicionarTarefa();
+        });
+
+        // Função para adicionar uma tarefa
+        function adicionarTarefa() {
+            const nomeTarefa = document.getElementById("nome-tarefa").value.trim();
+            if (nomeTarefa === "") {
+                alert("Por favor, insira o nome da tarefa.");
+                return;
+            }
+
+            const tarefa = {
+                nome: nomeTarefa,
+                status: "A concluir"
+            };
+
+            let tarefas = localStorage.getItem("tarefas");
+            tarefas = tarefas ? JSON.parse(tarefas) : [];
+            tarefas.push(tarefa);
+            localStorage.setItem("tarefas", JSON.stringify(tarefas));
+
+            document.getElementById("form-tarefa").reset();
+            carregarTarefas();
+        }
+
+        // Função para carregar e exibir tarefas
+        function carregarTarefas() {
+            const tarefasContainer = document.getElementById("tarefas-container");
+            tarefasContainer.innerHTML = "";
+
+            let tarefas = localStorage.getItem("tarefas");
+            tarefas = tarefas ? JSON.parse(tarefas) : [];
+
+            if (tarefas.length === 0) {
+                tarefasContainer.textContent = "Não há tarefas para serem tratadas.";
+                return;
+            }
+
+            const tabela = document.createElement("table");
+            tabela.innerHTML = `
+                <tr>
+                    <th>Nome da Tarefa</th>
+                    <th>Status da Tarefa</th>
+                    <th>Alterar Status</th>
+                    <th>Excluir</th>
+                </tr>
+            `;
+
+            tarefas.forEach((tarefa, index) => {
+                const linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${tarefa.nome}</td>
+                    <td>${tarefa.status}</td>
+                    <td>
+                        <button  class="buttonAlterar" onclick="alterarStatus(${index})">Alterar Status</button>
+                       
+                    </td>
+                    <td>
+                        
+                        <button class="buttonExcluir" onclick="excluirTarefa(${index})">Excluir</button>
+                    </td>
+                `;
+                tabela.appendChild(linha);
+            });
+
+            tarefasContainer.appendChild(tabela);
+        }
+
+        // Função para alterar o status de uma tarefa
+        function alterarStatus(index) {
+            let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+            const status = tarefas[index].status;
+            tarefas[index].status = status === "A concluir" ? "Concluída" : "A concluir";
+            localStorage.setItem("tarefas", JSON.stringify(tarefas));
+            carregarTarefas();
+        }
+
+        // Função para excluir uma tarefa
+        function excluirTarefa(index) {
+            let tarefas = JSON.parse(localStorage.getItem("tarefas"));
+            tarefas.splice(index, 1);
+            localStorage.setItem("tarefas", JSON.stringify(tarefas));
+            carregarTarefas();
+        }
+    </script>
+</body>
+
+</html>
